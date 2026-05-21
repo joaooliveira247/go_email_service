@@ -13,3 +13,6 @@ services:
       RABBITMQ_DEFAULT_USER: $RABBIT_USER
       RABBITMQ_DEFAULT_PASS: $RABBIT_PASSWORD
     restart: "no"
+
+networks:
+  email_service_network:
