@@ -2,7 +2,7 @@ package config
 
 import (
 	"fmt"
-	"log"
+	"log/slog"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -14,7 +14,8 @@ func LoadEnv() {
 	var err error
 
 	if err = godotenv.Load(); err != nil {
-		log.Fatalf("(Config/dotenv): %s\n", err)
+		slog.Error("Failed when try load .env file", "error", err)
+		os.Exit(1)
 	}
 
 	RabbitURL = fmt.Sprintf("amqp://%s:%s@%s:%s/",
