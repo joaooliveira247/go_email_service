@@ -16,6 +16,13 @@ var (
 	EmailRetryTTL   = 1000
 )
 
+func getEnv(key, defaultValue string) string {
+	if value, exists := os.LookupEnv(key); exists {
+		return value
+	}
+	return defaultValue
+}
+
 func LoadEnv() {
 	var err error
 
