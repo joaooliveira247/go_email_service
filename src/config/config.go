@@ -11,7 +11,7 @@ import (
 
 var (
 	RabbitURL       = ""
-	RabbitExchange   = ""
+	RabbitExchange  = ""
 	EmailQueue      = ""
 	EmailRetryQueue = ""
 	EmailDLQQueue   = ""
@@ -38,6 +38,7 @@ func LoadEnv() {
 		getEnv("RABBIT_USER", ""), getEnv("RABBIT_PASSWORD", ""),
 		getEnv("RABBIT_HOST", ""), getEnv("RABBIT_PORT", ""),
 	)
+	RabbitExchange = getEnv("RABBIT_EXCHANGE", "")
 
 	EmailQueue = getEnv("RABBIT_EMAIL_QUEUE", "email.orders")
 	EmailRetryQueue = getEnv("RABBIT_EMAIL_RETRY_QUEUE", "email.orders")
@@ -49,6 +50,18 @@ func LoadEnv() {
 		} else {
 			slog.Warn(
 				"RABBIT_RETRY_TTL invalid, change to default value",
+				"error",
+				err,
+			)
+		}
+	}
+
+	if retriesStr := os.Getenv("RABBIT_RETRIES"); retriesStr != "" {
+		if val, err := strconv.Atoi(retriesStr); err == nil {
+			MaxRetries = val
+		} else {
+			slog.Warn(
+				"RABBIT_RETRIES invalid, change to default value",
 				"error",
 				err,
 			)
