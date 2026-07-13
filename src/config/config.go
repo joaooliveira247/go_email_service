@@ -8,7 +8,13 @@ import (
 	"github.com/joho/godotenv"
 )
 
-var RabbitURL = ""
+var (
+	RabbitURL       = ""
+	EmailQueue      = ""
+	EmailRetryQueue = ""
+	EmailDLQQueue   = ""
+	EmailRetryTTL   = 1000
+)
 
 func LoadEnv() {
 	var err error
