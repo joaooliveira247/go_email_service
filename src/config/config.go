@@ -11,10 +11,12 @@ import (
 
 var (
 	RabbitURL       = ""
+	RabbitExhange   = ""
 	EmailQueue      = ""
 	EmailRetryQueue = ""
 	EmailDLQQueue   = ""
 	EmailRetryTTL   = 1000
+	MaxRetries      = 3
 )
 
 func getEnv(key, defaultValue string) string {
