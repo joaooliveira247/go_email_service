@@ -32,7 +32,7 @@ func LoadEnv() {
 	}
 
 	RabbitURL = fmt.Sprintf("amqp://%s:%s@%s:%s/",
-		os.Getenv("RABBIT_USER"), os.Getenv("RABBIT_PASSWORD"),
-		os.Getenv("RABBIT_HOST"), os.Getenv("RABBIT_PORT"),
+		getEnv("RABBIT_USER", ""), getEnv("RABBIT_PASSWORD", ""),
+		getEnv("RABBIT_HOST", ""), getEnv("RABBIT_PORT", ""),
 	)
 }
