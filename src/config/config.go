@@ -11,7 +11,7 @@ import (
 
 var (
 	RabbitURL       = ""
-	RabbitExhange   = ""
+	RabbitExchange   = ""
 	EmailQueue      = ""
 	EmailRetryQueue = ""
 	EmailDLQQueue   = ""
