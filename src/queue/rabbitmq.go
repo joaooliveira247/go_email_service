@@ -73,5 +73,5 @@ func (rc *RabbitConnection) Close() {
 	if rc.Conn != nil {
 		rc.Conn.Close()
 	}
-	slog.Info("Conections with RabbitMQ closed")
+	slog.Info("Connections with RabbitMQ closed")
 }
