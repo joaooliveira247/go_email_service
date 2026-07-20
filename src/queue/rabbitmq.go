@@ -2,6 +2,7 @@ package queue
 
 import (
 	"fmt"
+	"log/slog"
 
 	"github.com/joaooliveira247/go_email_service/src/config"
 	amqp "github.com/rabbitmq/amqp091-go"
@@ -63,4 +64,14 @@ func (rc *RabbitConnection) declareQueues() error {
 	}
 
 	return nil
+}
+
+func (rc *RabbitConnection) Close() {
+	if rc.Channel != nil {
+		rc.Channel.Close()
+	}
+	if rc.Conn != nil {
+		rc.Conn.Close()
+	}
+	slog.Info("Conections with RabbitMQ closed")
 }
