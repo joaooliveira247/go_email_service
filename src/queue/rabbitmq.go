@@ -13,6 +13,36 @@ type RabbitConnection struct {
 	Channel *amqp.Channel
 }
 
+func SetupRabbitMq() (*RabbitConnection, error) {
+	slog.Info("Connecting to RabbitMQ...")
+
+	conn, err := amqp.Dial(config.RabbitURL)
+
+	if err != nil {
+		return nil, fmt.Errorf("Fail when try connection to RabbitMQ: %w", err)
+	}
+
+	ch, err := conn.Channel()
+
+	if err != nil {
+		conn.Close()
+		return nil, fmt.Errorf("Fail when try open channel: %w", err)
+	}
+
+	rabbit := &RabbitConnection{
+		Conn:    conn,
+		Channel: ch,
+	}
+
+	if err := rabbit.declareQueues(); err != nil {
+		rabbit.Close()
+		return nil, err
+	}
+
+	slog.Info("RabbitMQ loaded and Queues Created!")
+	return rabbit, nil
+}
+
 func (rc *RabbitConnection) declareQueues() error {
 
 	// DLQ declaration
