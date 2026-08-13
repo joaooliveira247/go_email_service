@@ -42,7 +42,7 @@ func LoadEnv() {
 
 	EmailQueue = getEnv("RABBIT_EMAIL_QUEUE", "email.orders")
 	EmailRetryQueue = getEnv("RABBIT_EMAIL_RETRY_QUEUE", "email.retry")
-	EmailDLQQueue = getEnv("RABBIT_EMAIL_RETRY_QUEUE", "email.orders")
+	EmailDLQQueue = getEnv("RABBIT_EMAIL_RETRY_QUEUE", "email.dlq")
 
 	if ttlStr := os.Getenv("RABBIT_RETRY_TTL"); ttlStr != "" {
 		if val, err := strconv.Atoi(ttlStr); err == nil {
