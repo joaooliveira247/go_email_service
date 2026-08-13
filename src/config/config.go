@@ -41,7 +41,7 @@ func LoadEnv() {
 	RabbitExchange = getEnv("RABBIT_EXCHANGE", "")
 
 	EmailQueue = getEnv("RABBIT_EMAIL_QUEUE", "email.orders")
-	EmailRetryQueue = getEnv("RABBIT_EMAIL_RETRY_QUEUE", "email.orders")
+	EmailRetryQueue = getEnv("RABBIT_EMAIL_RETRY_QUEUE", "email.retry")
 	EmailDLQQueue = getEnv("RABBIT_EMAIL_RETRY_QUEUE", "email.orders")
 
 	if ttlStr := os.Getenv("RABBIT_RETRY_TTL"); ttlStr != "" {
